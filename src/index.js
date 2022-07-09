@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+// state at the beginning is NULL so there is nothing in each sqare
 class Square extends React.Component {
   constructor(props) {
     super(props);
@@ -9,19 +10,27 @@ class Square extends React.Component {
       value: null,
     };
   }
+  // state changes to 'X' and draws it in specific square when the button is clicked. setState must be changed(as it is childs component)
   render() {
     return (
-      <button 
-      className="square" 
-      onClick={() => this.setState({ value: "X" })}
-      >
+      <button className="square" onClick={() => this.setState({ value: "X" })}>
         {this.state.value}
       </button>
     );
   }
 }
 
+// board is a square of multiple Squares with states
+// constructor was added to the Board component and
+// the Board's initial state to contain an array of
+// 9 nulls corresponding to the 9 squares
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
   renderSquare(i) {
     return <Square value={i} />;
   }
